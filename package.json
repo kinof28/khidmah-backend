@@ -1,8 +1,8 @@
 {
   "name": "khidma-backend",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "backend for hi khidma application for the admin, customer and providers built using nestjs ",
+  "author": "Abdelwahab",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
@@ -28,7 +28,8 @@
     "@prisma/client": "^6.4.1",
     "bcrypt": "^5.1.1",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
