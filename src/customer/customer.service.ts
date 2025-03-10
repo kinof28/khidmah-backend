@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { Prisma } from '@prisma/client';
 import { CustomerDto } from './dto/customer.dto';
 import { Customer } from './entities/customer.entity';
+import customerToCustomerDto from './mapper/customer.mapper';
 
 @Injectable()
 export class CustomerService {
@@ -51,8 +52,17 @@ export class CustomerService {
     return `This action returns all client`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} client`;
+  async findOne(id: number) {
+    try {
+      const user = await this.prismaService.customer.findUnique({
+        where: { id },
+      });
+      const userDto = customerToCustomerDto(user);
+      return userDto;
+    } catch (error) {
+      console.log('from customerService findOne: ', error);
+      return null;
+    }
   }
 
   async findOneByEmail(email: string): Promise<Customer | null> {

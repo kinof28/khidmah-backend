@@ -7,6 +7,8 @@ import {
   Param,
   Delete,
   UsePipes,
+  UseGuards,
+  Request,
 } from '@nestjs/common';
 import { CustomerService } from './customer.service';
 import {
@@ -15,6 +17,9 @@ import {
 } from './dto/create-customer.dto';
 // import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { ZodValidationPipe } from 'src/shared/pipes/zod-validation.pipe';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { CustomerGuard } from 'src/shared/guards/customer.guard';
+import { Request as ExpressRequest } from 'express';
 
 @Controller('customer')
 export class CustomerController {
@@ -29,6 +34,13 @@ export class CustomerController {
   @Get()
   findAll() {
     return this.customerService.findAll();
+  }
+
+  @Get('profile')
+  @UseGuards(AuthGuard, CustomerGuard)
+  getProfile(@Request() req: ExpressRequest) {
+    console.log('req.payload: ', req['payload']);
+    return this.customerService.findOne(req['payload'].sub);
   }
 
   @Get(':id')

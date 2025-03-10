@@ -3,11 +3,10 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class CustomerGuard implements CanActivate {
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
-    console.log('request.user: ', request.payload);
+    // Todo: remove console.log
+    // console.log('request.user: ', request.payload);
     return request.payload.role === 'customer';
   }
 }
