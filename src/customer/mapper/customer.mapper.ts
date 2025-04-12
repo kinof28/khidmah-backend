@@ -6,7 +6,7 @@ const customerToCustomerDto = (customer) => {
     name: customer.name,
     email: customer.email,
     phone: customer.phone,
-    location: customer.location,
+    location: customer.longitude + ',' + customer.latitude,
   };
   return customerDto;
 };

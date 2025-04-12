@@ -24,7 +24,7 @@ export class CustomerService {
         name: result.name,
         email: result.email,
         phone: result.phone,
-        location: result.location,
+        location: result.longitude + ',' + result.latitude,
       };
       return customerDto;
     } catch (error) {

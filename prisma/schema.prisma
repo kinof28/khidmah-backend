@@ -16,14 +16,30 @@ model Admin {
 }
 
 model Service {
-    id          Int        @id @default(autoincrement())
-    name        String
-    description String
-    image       String?    @default("")
-    createdAt   DateTime   @default(now())
-    updatedAt   DateTime   @updatedAt
-    providers   Provider[]
-    // bookings Booking[]
+    id        Int           @id @default(autoincrement())
+    title_ar  String
+    title_en  String
+    price     Int?
+    isActive  Boolean       @default(false)
+    isRide    Boolean       @default(false)
+    types     ServiceType[]
+    image     String?       @default("")
+    createdAt DateTime      @default(now())
+    updatedAt DateTime      @updatedAt
+    providers Provider[]
+    bookings  Booking[]
+}
+
+model ServiceType {
+    id        Int       @id @default(autoincrement())
+    title_ar  String
+    title_en  String
+    price     Int
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    service   Service   @relation(fields: [serviceId], references: [id])
+    serviceId Int
+    bookings  Booking[]
 }
 
 model Provider {
@@ -32,7 +48,8 @@ model Provider {
     email       String    @unique
     phone       String    @unique
     password    String
-    location    String    @default("")
+    longitude   String    @default("")
+    latitude    String    @default("")
     image       String    @default("")
     idImage     Bytes?
     description String?
@@ -41,44 +58,52 @@ model Provider {
     updatedAt   DateTime  @updatedAt
     isVerified  Boolean   @default(false)
     isActive    Boolean   @default(false)
-
-    isBlocked Boolean @default(false)
-    isDeleted Boolean @default(false)
-    // bookings Booking[]
+    isBlocked   Boolean   @default(false)
+    isDeleted   Boolean   @default(false)
+    bookings    Booking[]
 }
 
 model Customer {
-    id         Int      @id @default(autoincrement())
+    id         Int       @id @default(autoincrement())
     name       String
-    email      String   @unique
-    phone      String   @unique
+    email      String    @unique
+    phone      String    @unique
     password   String
-    location   String   @default("")
-    image      String   @default("")
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
-    isVerified Boolean  @default(false)
-    isBlocked  Boolean  @default(false)
-    isDeleted  Boolean  @default(false)
-    // bookings Booking[]
+    longitude  String    @default("")
+    latitude   String    @default("")
+    image      String    @default("")
+    createdAt  DateTime  @default(now())
+    updatedAt  DateTime  @updatedAt
+    isVerified Boolean   @default(false)
+    isBlocked  Boolean   @default(false)
+    isDeleted  Boolean   @default(false)
+    bookings   Booking[]
 }
 
-// model Booking{
-//     id Int @id @default(autoincrement())
-//     customer Customer @relation(fields: [customerId], references: [id])
-//     customerId Int
-//     provider Provider @relation(fields: [providerId], references: [id])
-//     providerId Int
-//     service Service @relation(fields: [serviceId], references: [id])
-//     serviceId Int
-//     date DateTime
-//     time DateTime
-//     createdAt DateTime @default(now())
-//     updatedAt DateTime @updatedAt
-//     isConfirmed Boolean @default(false)
-//     isCancelled Boolean @default(false)
-//     isCompleted Boolean @default(false)
-//     isDeleted Boolean @default(false)
-//     isRated Boolean @default(false)
-//     isPaid Boolean @default(false)
-// }
+model Booking {
+    id             Int         @id @default(autoincrement())
+    customer       Customer    @relation(fields: [customerId], references: [id])
+    customerId     Int
+    provider       Provider    @relation(fields: [providerId], references: [id])
+    providerId     Int
+    service        Service     @relation(fields: [serviceId], references: [id])
+    serviceId      Int
+    serviceType    ServiceType @relation(fields: [serviceTypeId], references: [id])
+    serviceTypeId  Int
+    rating         Int?
+    comment        String?
+    price          Int
+    createdAt      DateTime    @default(now())
+    updatedAt      DateTime    @updatedAt
+    isConfirmed    Boolean     @default(false)
+    isCancelled    Boolean     @default(false)
+    isCompleted    Boolean     @default(false)
+    isCustomerPaid Boolean     @default(false)
+    isProviderPaid Boolean     @default(false)
+    from_longitude String      @default("")
+    from_latitude  String      @default("")
+    to_longitude   String      @default("")
+    to_latitude    String      @default("")
+    at_longitude   String      @default("")
+    at_latitude    String      @default("")
+}

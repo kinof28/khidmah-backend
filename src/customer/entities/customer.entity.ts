@@ -4,7 +4,8 @@ export class Customer {
   email: string;
   phone: string;
   password: string;
-  location: string;
+  longitude: string;
+  latitude: string;
   image?: string;
   createdAt: Date;
   updatedAt: Date;
