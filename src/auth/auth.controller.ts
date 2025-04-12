@@ -15,4 +15,15 @@ export class AuthController {
       customerLoginDto.password,
     );
   }
+
+  @Post('admin')
+  @UsePipes(new ZodValidationPipe(loginSchema))
+  adminLogin(@Body() adminLoginDto: LoginDto) {
+    console.log('trying to log in admin');
+    console.log('adminLoginDto: ', adminLoginDto);
+    return this.authService.signInAdmin(
+      adminLoginDto.email,
+      adminLoginDto.password,
+    );
+  }
 }

@@ -1,6 +1,5 @@
-export class Admin {
+export class AdminDto {
   id: number;
   name: string;
   email: string;
-  password: string;
 }
