@@ -3,7 +3,15 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  console.log('App is running on port ' + process.env.PORT);
+
+  // Enable CORS
+  app.enableCors({
+    origin: 'http://localhost:5173', // Your React app's origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+    // credentials: true, // If you need to pass cookies
+  });
+
   await app.listen(process.env.PORT || 3000);
 }
 bootstrap();
