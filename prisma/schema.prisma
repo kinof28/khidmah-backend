@@ -107,3 +107,13 @@ model Booking {
     at_longitude   String      @default("")
     at_latitude    String      @default("")
 }
+
+model ContactRequest {
+    id        Int      @id @default(autoincrement())
+    email     String
+    subject   String
+    body      String
+    replied   Boolean  @default(false)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
