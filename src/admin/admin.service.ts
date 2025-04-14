@@ -24,8 +24,33 @@ export class AdminService {
     const result = await this.prismaService.admin.findUnique({
       where: { id },
     });
-    console.log('result: ', result);
     return adminToAdminDto(result);
+  }
+  async getContactRequests() {
+    const result = await this.prismaService.contactRequest.findMany();
+    return result;
+  }
+  async getContactRequestsById(id: number) {
+    const result = await this.prismaService.contactRequest.findUnique({
+      where: { id },
+    });
+    return result;
+  }
+  async deleteContactRequestsById(id: number) {
+    const result = await this.prismaService.contactRequest.delete({
+      where: { id },
+    });
+    return result;
+  }
+  async replyToContactRequest(id: number, reply: string) {
+    const result = await this.prismaService.contactRequest.update({
+      where: { id },
+      data: {
+        replied: true,
+      },
+    });
+    // Todo: send email
+    return result;
   }
 
   update(id: number, updateAdminDto: UpdateAdminDto) {
