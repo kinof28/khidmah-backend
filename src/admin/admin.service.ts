@@ -19,23 +19,16 @@ export class AdminService {
       return null;
     }
   }
-  create(createAdminDto: CreateAdminDto) {
-    return 'This action adds a new admin';
-  }
 
-  findAll() {
-    return `This action returns all admin`;
-  }
-
-  findOne(id: number) {
-    return `This action returns a #${id} admin`;
+  async findOne(id: number) {
+    const result = await this.prismaService.admin.findUnique({
+      where: { id },
+    });
+    console.log('result: ', result);
+    return adminToAdminDto(result);
   }
 
   update(id: number, updateAdminDto: UpdateAdminDto) {
     return `This action updates a #${id} admin`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} admin`;
   }
 }
