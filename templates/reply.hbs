@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>{{subject}}</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        margin: 0;
+        padding: 0;
+      }
+      .email-container {
+        max-width: 600px;
+        margin: 40px auto;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+      .email-header {
+        background-color: #003366;
+        color: white;
+        padding: 20px 30px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .email-body {
+        padding: 30px;
+        color: #333333;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .email-footer {
+        padding: 20px 30px;
+        background-color: #f1f1f1;
+        color: #777777;
+        font-size: 13px;
+        text-align: center;
+      }
+      .email-footer a {
+        color: #555555;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='email-container'>
+      <div class='email-header'>
+        {{subject}}
+      </div>
+      <div class='email-body'>
+        {{body}}
+      </div>
+      <div class='email-footer'>
+        Sincerely,<br />
+        <strong>Administration Team</strong><br />
+        <a href='mailto:info@hikhidma.com'>info@hikhidma.com</a><br />
+        ©
+        {{year}}
+        Organization Name. All rights reserved.
+      </div>
+    </div>
+  </body>
+</html>

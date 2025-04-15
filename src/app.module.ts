@@ -7,6 +7,9 @@ import { AdminModule } from './admin/admin.module';
 import { ProviderModule } from './provider/provider.module';
 import { PrismaService } from './prisma.service';
 import { AuthModule } from './auth/auth.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { MailService } from './mail/mail.service';
 
 @Module({
   imports: [
@@ -17,9 +20,30 @@ import { AuthModule } from './auth/auth.module';
     AdminModule,
     ProviderModule,
     AuthModule,
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.SMTP_HOST,
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.APP_EMAIL,
+          pass: process.env.APP_EMAIL_PASSWORD,
+        },
+      },
+      defaults: {
+        from: process.env.APP_EMAIL,
+      },
+      template: {
+        dir: __dirname.replace('dist', '') + '/templates',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService],
+  providers: [AppService, PrismaService, MailService],
   exports: [PrismaService],
 })
 export class AppModule {}

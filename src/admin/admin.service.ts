@@ -3,10 +3,14 @@ import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { PrismaService } from 'src/prisma.service';
 import adminToAdminDto from './mapper/admin.mapper';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class AdminService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly mailService: MailService,
+  ) {}
 
   findOneByEmail(email: string) {
     try {
@@ -42,7 +46,7 @@ export class AdminService {
     });
     return result;
   }
-  async replyToContactRequest(id: number, reply: string) {
+  async replyToContactRequest(id: number, reply) {
     const result = await this.prismaService.contactRequest.update({
       where: { id },
       data: {
@@ -50,6 +54,12 @@ export class AdminService {
       },
     });
     // Todo: send email
+    // this.mailService.sendWelcomeEmail('ab28fb@gmail.com', 'Abdelwahab dev');
+    this.mailService.replyToContactRequest(
+      result.email,
+      reply.subject,
+      reply.body,
+    );
     return result;
   }
 

@@ -50,7 +50,7 @@ export class AdminController {
   }
   @Post('contacts/:id/reply')
   @UseGuards(AuthGuard, AdminGuard)
-  replyToContactRequest(@Param('id') id: number, reply) {
+  replyToContactRequest(@Param('id') id: number, @Body() reply) {
     return this.adminService.replyToContactRequest(+id, reply);
   }
 
