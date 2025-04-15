@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { Prisma } from '@prisma/client';
 import { CustomerDto } from './dto/customer.dto';
 import { Customer } from './entities/customer.entity';
-import customerToCustomerDto from './mapper/customer.mapper';
+import { customerToCustomerDto } from './mapper/customer.mapper';
 
 @Injectable()
 export class CustomerService {
@@ -24,7 +24,10 @@ export class CustomerService {
         name: result.name,
         email: result.email,
         phone: result.phone,
-        location: result.longitude + ',' + result.latitude,
+        longitude: result.longitude,
+        latitude: result.latitude,
+        image: result.image,
+        createdAt: result.createdAt,
       };
       return customerDto;
     } catch (error) {
@@ -57,6 +60,9 @@ export class CustomerService {
       const user = await this.prismaService.customer.findUnique({
         where: { id },
       });
+      if (!user) {
+        return null;
+      }
       const userDto = customerToCustomerDto(user);
       return userDto;
     } catch (error) {

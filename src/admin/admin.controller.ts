@@ -56,7 +56,10 @@ export class AdminController {
 
   @Get('customers')
   @UseGuards(AuthGuard, AdminGuard)
-  getCustomers() {}
+  getCustomers() {
+    const result = this.adminService.getCustomers();
+    return result;
+  }
 
   @Get('customers/:id')
   @UseGuards(AuthGuard, AdminGuard)
@@ -64,7 +67,10 @@ export class AdminController {
 
   @Get('providers')
   @UseGuards(AuthGuard, AdminGuard)
-  getProviders() {}
+  getProviders() {
+    const result = this.adminService.getProviders();
+    return result;
+  }
 
   @Get('providers/:id')
   @UseGuards(AuthGuard, AdminGuard)

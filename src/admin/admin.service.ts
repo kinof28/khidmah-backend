@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateAdminDto } from './dto/create-admin.dto';
 import { UpdateAdminDto } from './dto/update-admin.dto';
 import { PrismaService } from 'src/prisma.service';
 import adminToAdminDto from './mapper/admin.mapper';
 import { MailService } from 'src/mail/mail.service';
+import { customersToCustomerDtos } from 'src/customer/mapper/customer.mapper';
+import { providersToProvidersDto } from 'src/provider/mapper/provider.mapper';
 
 @Injectable()
 export class AdminService {
@@ -76,6 +77,15 @@ export class AdminService {
       bookingsCount,
       mailsCount,
     };
+  }
+
+  async getCustomers() {
+    const result = await this.prismaService.customer.findMany();
+    return customersToCustomerDtos(result);
+  }
+  async getProviders() {
+    const result = await this.prismaService.provider.findMany();
+    return providersToProvidersDto(result);
   }
   update(id: number, updateAdminDto: UpdateAdminDto) {
     return `This action updates a #${id} admin`;
