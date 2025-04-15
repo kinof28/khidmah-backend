@@ -8,12 +8,14 @@ import {
   UseGuards,
   Delete,
   Post,
+  Put,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
-import { UpdateAdminDto } from './dto/update-admin.dto';
 import { Request as ExpressRequest } from 'express';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { AdminGuard } from 'src/shared/guards/admin.guard';
+import { UpdateEmailDto } from './dto/update-email.dto';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -71,6 +73,26 @@ export class AdminController {
     const result = this.adminService.getProviders();
     return result;
   }
+  @Put('update-email')
+  @UseGuards(AuthGuard, AdminGuard)
+  updateEmail(
+    @Request() req: ExpressRequest,
+    @Body() updateEmailDto: UpdateEmailDto,
+  ) {
+    return this.adminService.updateEmail(req['payload'].sub, updateEmailDto);
+  }
+
+  @Put('update-password')
+  @UseGuards(AuthGuard, AdminGuard)
+  updatePassword(
+    @Request() req: ExpressRequest,
+    @Body() updatePasswordDto: UpdatePasswordDto,
+  ) {
+    return this.adminService.updatePassword(
+      req['payload'].sub,
+      updatePasswordDto,
+    );
+  }
 
   @Get('providers/:id')
   @UseGuards(AuthGuard, AdminGuard)
@@ -95,10 +117,5 @@ export class AdminController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.adminService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAdminDto: UpdateAdminDto) {
-    return this.adminService.update(+id, updateAdminDto);
   }
 }

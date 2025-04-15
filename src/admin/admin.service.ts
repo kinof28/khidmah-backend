@@ -1,11 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { UpdateAdminDto } from './dto/update-admin.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import adminToAdminDto from './mapper/admin.mapper';
 import { MailService } from 'src/mail/mail.service';
 import { customersToCustomerDtos } from 'src/customer/mapper/customer.mapper';
 import { providersToProvidersDto } from 'src/provider/mapper/provider.mapper';
-
+import { UpdateEmailDto } from './dto/update-email.dto';
+import * as bcrypt from 'bcrypt';
+import { UpdatePasswordDto } from './dto/update-password.dto';
 @Injectable()
 export class AdminService {
   constructor(
@@ -87,7 +88,41 @@ export class AdminService {
     const result = await this.prismaService.provider.findMany();
     return providersToProvidersDto(result);
   }
-  update(id: number, updateAdminDto: UpdateAdminDto) {
-    return `This action updates a #${id} admin`;
+
+  async updateEmail(id: number, updateEmailDto: UpdateEmailDto) {
+    const admin = await this.prismaService.admin.findUnique({
+      where: { id },
+    });
+    if (
+      !admin ||
+      !bcrypt.compareSync(updateEmailDto.password, admin.password)
+    ) {
+      throw new UnauthorizedException('Password is incorrect');
+    }
+    const result = await this.prismaService.admin.update({
+      where: { id },
+      data: {
+        email: updateEmailDto.email,
+      },
+    });
+    return adminToAdminDto(result);
+  }
+  async updatePassword(id: number, updatePasswordDto: UpdatePasswordDto) {
+    const admin = await this.prismaService.admin.findUnique({
+      where: { id },
+    });
+    if (
+      !admin ||
+      !bcrypt.compareSync(updatePasswordDto.oldPassword, admin.password)
+    ) {
+      throw new UnauthorizedException('Password is incorrect');
+    }
+    const result = await this.prismaService.admin.update({
+      where: { id },
+      data: {
+        password: bcrypt.hashSync(updatePasswordDto.newPassword, 12),
+      },
+    });
+    return adminToAdminDto(result);
   }
 }
