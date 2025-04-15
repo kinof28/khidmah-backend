@@ -26,11 +26,11 @@ export class AdminController {
     return this.adminService.findOne(req['payload'].sub);
   }
 
-  // @Get("statistics")
-  // @UseGuards(AuthGuard, AdminGuard)
-  // getStatistics() {
-  //   return this.adminService.getStatistics();
-  // }
+  @Get('statistics')
+  @UseGuards(AuthGuard, AdminGuard)
+  getStatistics() {
+    return this.adminService.generateStatistics();
+  }
   @Get('contacts')
   @UseGuards(AuthGuard, AdminGuard)
   getContactRequests() {

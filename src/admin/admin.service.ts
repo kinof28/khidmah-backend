@@ -53,8 +53,6 @@ export class AdminService {
         replied: true,
       },
     });
-    // Todo: send email
-    // this.mailService.sendWelcomeEmail('ab28fb@gmail.com', 'Abdelwahab dev');
     this.mailService.replyToContactRequest(
       result.email,
       reply.subject,
@@ -62,7 +60,23 @@ export class AdminService {
     );
     return result;
   }
-
+  async generateStatistics() {
+    const servicesCount = await this.prismaService.service.count();
+    const providersCount = await this.prismaService.provider.count();
+    const customersCount = await this.prismaService.customer.count();
+    const providersRequestsCount =
+      await this.prismaService.providerRequest.count();
+    const bookingsCount = await this.prismaService.booking.count();
+    const mailsCount = await this.prismaService.contactRequest.count();
+    return {
+      servicesCount,
+      providersCount,
+      customersCount,
+      providersRequestsCount,
+      bookingsCount,
+      mailsCount,
+    };
+  }
   update(id: number, updateAdminDto: UpdateAdminDto) {
     return `This action updates a #${id} admin`;
   }

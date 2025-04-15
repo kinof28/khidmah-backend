@@ -1,7 +1,8 @@
 interface Statistics {
-  totalProviders: number;
-  totalCustomers: number;
-  totalServices: number;
-  totalRequests: number;
-  totalContacts: number;
+  servicesCount: number;
+  customersCount: number;
+  providersCount: number;
+  providersRequestsCount: number;
+  bookingsCount: number;
+  mailsCount: number;
 }
