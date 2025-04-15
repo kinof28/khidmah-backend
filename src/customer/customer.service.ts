@@ -16,7 +16,7 @@ export class CustomerService {
       const result = await this.prismaService.customer.create({
         data: {
           ...createCustomerDto,
-          password: bcrypt.hashSync(createCustomerDto.password, 10),
+          password: bcrypt.hashSync(createCustomerDto.password, 12),
         },
       });
       const customerDto: CustomerDto = {
@@ -41,14 +41,6 @@ export class CustomerService {
       console.log('from catch: ', error);
       throw new ConflictException(error.meta.target[0] + ' already exists');
     }
-    // .then((res) => {
-    //   console.log(res);
-    //   return res;
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    //   return new ConflictException(err.message);
-    // });
   }
 
   findAll() {
