@@ -15,33 +15,32 @@ model Admin {
 }
 
 model Service {
-    id        Int           @id @default(autoincrement())
+    id        Int        @id @default(autoincrement())
     title_ar  String
     title_en  String
-    price     Int?
-    isActive  Boolean       @default(false)
-    isRide    Boolean       @default(false)
-    types     ServiceType[]
-    image     String?       @default("")
-    createdAt DateTime      @default(now())
-    updatedAt DateTime      @updatedAt
+    isActive  Boolean    @default(true)
+    isRide    Boolean    @default(false)
+    // types     ServiceType[]
+    image     String?    @default("")
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
     providers Provider[]
     bookings  Booking[]
 
     ProviderRequest ProviderRequest[]
 }
 
-model ServiceType {
-    id        Int       @id @default(autoincrement())
-    title_ar  String
-    title_en  String
-    price     Int
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    service   Service   @relation(fields: [serviceId], references: [id])
-    serviceId Int
-    bookings  Booking[]
-}
+// model ServiceType {
+//     id        Int       @id @default(autoincrement())
+//     title_ar  String
+//     title_en  String
+//     price     Int
+//     createdAt DateTime  @default(now())
+//     updatedAt DateTime  @updatedAt
+//     service   Service   @relation(fields: [serviceId], references: [id])
+//     serviceId Int
+//     bookings  Booking[]
+// }
 
 model Provider {
     id          Int       @id @default(autoincrement())
@@ -84,31 +83,31 @@ model Customer {
 }
 
 model Booking {
-    id             Int         @id @default(autoincrement())
-    customer       Customer    @relation(fields: [customerId], references: [id])
+    id             Int      @id @default(autoincrement())
+    customer       Customer @relation(fields: [customerId], references: [id])
     customerId     Int
-    provider       Provider    @relation(fields: [providerId], references: [id])
+    provider       Provider @relation(fields: [providerId], references: [id])
     providerId     Int
-    service        Service     @relation(fields: [serviceId], references: [id])
+    service        Service  @relation(fields: [serviceId], references: [id])
     serviceId      Int
-    serviceType    ServiceType @relation(fields: [serviceTypeId], references: [id])
-    serviceTypeId  Int
+    // serviceType    ServiceType @relation(fields: [serviceTypeId], references: [id])
+    // serviceTypeId  Int
     rating         Int?
     comment        String?
     price          Int
-    createdAt      DateTime    @default(now())
-    updatedAt      DateTime    @updatedAt
-    isConfirmed    Boolean     @default(false)
-    isCancelled    Boolean     @default(false)
-    isCompleted    Boolean     @default(false)
-    isCustomerPaid Boolean     @default(false)
-    isProviderPaid Boolean     @default(false)
-    from_longitude String      @default("")
-    from_latitude  String      @default("")
-    to_longitude   String      @default("")
-    to_latitude    String      @default("")
-    at_longitude   String      @default("")
-    at_latitude    String      @default("")
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
+    isConfirmed    Boolean  @default(false)
+    isCancelled    Boolean  @default(false)
+    isCompleted    Boolean  @default(false)
+    isCustomerPaid Boolean  @default(false)
+    isProviderPaid Boolean  @default(false)
+    from_longitude String   @default("")
+    from_latitude  String   @default("")
+    to_longitude   String   @default("")
+    to_latitude    String   @default("")
+    at_longitude   String   @default("")
+    at_latitude    String   @default("")
 }
 
 model ContactRequest {
