@@ -16,6 +16,7 @@ import { AuthGuard } from 'src/auth/auth.guard';
 import { AdminGuard } from 'src/shared/guards/admin.guard';
 import { UpdateEmailDto } from './dto/update-email.dto';
 import { UpdatePasswordDto } from './dto/update-password.dto';
+import CreateServiceDto from './dto/create-service.dto';
 
 @Controller('admin')
 export class AdminController {
@@ -108,7 +109,16 @@ export class AdminController {
 
   @Get('services')
   @UseGuards(AuthGuard, AdminGuard)
-  getServices() {}
+  getServices() {
+    const result = this.adminService.getServices();
+    return result;
+  }
+
+  @Post('services')
+  @UseGuards(AuthGuard, AdminGuard)
+  createService(@Body() createServiceDto: CreateServiceDto) {
+    return this.adminService.createService(createServiceDto);
+  }
 
   @Get('services/:id')
   @UseGuards(AuthGuard, AdminGuard)

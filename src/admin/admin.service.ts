@@ -7,6 +7,7 @@ import { providersToProvidersDto } from 'src/provider/mapper/provider.mapper';
 import { UpdateEmailDto } from './dto/update-email.dto';
 import * as bcrypt from 'bcrypt';
 import { UpdatePasswordDto } from './dto/update-password.dto';
+import CreateServiceDto from './dto/create-service.dto';
 @Injectable()
 export class AdminService {
   constructor(
@@ -124,5 +125,17 @@ export class AdminService {
       },
     });
     return adminToAdminDto(result);
+  }
+
+  async getServices() {
+    const result = await this.prismaService.service.findMany();
+    return result;
+  }
+  async createService(createServiceDto: CreateServiceDto) {
+    console.log('createServiceDto: ', createServiceDto);
+    const result = await this.prismaService.service.create({
+      data: createServiceDto,
+    });
+    return result;
   }
 }
