@@ -8,9 +8,15 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  @UseGuards(AuthGuard, CustomerGuard)
   getHello(): string {
     return this.appService.getHello();
+  }
+
+  @Get('services')
+  @UseGuards(AuthGuard)
+  getServices() {
+    const result = this.appService.getServices();
+    return result;
   }
 
   @Post('contact')

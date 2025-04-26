@@ -14,4 +14,8 @@ export class AppService {
     });
     return result;
   }
+  async getServices() {
+    const result = await this.prismaService.service.findMany();
+    return result;
+  }
 }
