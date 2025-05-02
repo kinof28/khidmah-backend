@@ -28,6 +28,11 @@ export class CustomerController {
   @Post('subscribe')
   @UsePipes(new ZodValidationPipe(createCustomerSchema))
   create(@Body() createCustomerDto: CreateCustomerDto) {
+    console.log('trying to subscribe');
+    console.log('createCustomerDto: ', createCustomerDto);
+    if (createCustomerDto.type === 'WhatsApp') {
+      console.log('send a whatsapp message ....');
+    }
     return this.customerService.create(createCustomerDto);
   }
 
@@ -39,11 +44,11 @@ export class CustomerController {
   @Get('profile')
   @UseGuards(AuthGuard, CustomerGuard)
   getProfile(@Request() req: ExpressRequest) {
-    console.log('req.payload: ', req['payload']);
     return this.customerService.findOne(req['payload'].sub);
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard, CustomerGuard)
   findOne(@Param('id') id: string) {
     return this.customerService.findOne(+id);
   }

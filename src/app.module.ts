@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { MailService } from './mail/mail.service';
+import { WhatsAppService } from './sms/whatsapp.service';
 
 @Module({
   imports: [
@@ -43,7 +44,7 @@ import { MailService } from './mail/mail.service';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService, PrismaService, MailService],
+  providers: [AppService, PrismaService, MailService, WhatsAppService],
   exports: [PrismaService],
 })
 export class AppModule {}

@@ -6,12 +6,26 @@ import { Prisma } from '@prisma/client';
 import { CustomerDto } from './dto/customer.dto';
 import { Customer } from './entities/customer.entity';
 import { customerToCustomerDto } from './mapper/customer.mapper';
+import { WhatsAppService } from 'src/sms/whatsapp.service';
 
 @Injectable()
 export class CustomerService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly whatsAppService: WhatsAppService,
+  ) {}
 
   async create(createCustomerDto: CreateCustomerDto) {
+    if (createCustomerDto.type === 'WhatsApp') {
+      console.log('send a whatsapp message ....');
+      const result = await this.whatsAppService.sendTextMessage(
+        createCustomerDto.phone,
+        'test message',
+      );
+      console.log(result);
+      return result;
+    }
+
     try {
       const result = await this.prismaService.customer.create({
         data: {
