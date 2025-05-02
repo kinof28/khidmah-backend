@@ -8,8 +8,7 @@ async function bootstrap() {
   app.enableCors({
     origin: [
       'http://localhost:5173', // Your React app's origin
-      // todo: add production domain
-      'https://your-production-domain.com', // Production domain
+      'https://hikhidma.com', // Production domain
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
