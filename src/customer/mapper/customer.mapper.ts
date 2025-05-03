@@ -1,4 +1,4 @@
-import { Customer } from '@prisma/client';
+import { Customer } from 'prisma/generated/client';
 import { CustomerDto } from '../dto/customer.dto';
 
 const customerToCustomerDto = (customer: Customer) => {

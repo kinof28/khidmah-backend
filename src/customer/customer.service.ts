@@ -2,11 +2,11 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
-import { Prisma } from '@prisma/client';
 import { CustomerDto } from './dto/customer.dto';
 import { Customer } from './entities/customer.entity';
 import { customerToCustomerDto } from './mapper/customer.mapper';
 import { WhatsAppService } from 'src/sms/whatsapp.service';
+import { Prisma } from 'prisma/generated/client';
 
 @Injectable()
 export class CustomerService {
