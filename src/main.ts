@@ -9,7 +9,7 @@ async function bootstrap() {
     origin: [
       'http://localhost:5173', // Your React app's origin
       'https://hikhidma.com', // Production domain
-      'http://hikhidma.com.moalime.com/', //development domain
+      'http://hikhidma.com.moalime.com', //development domain
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     allowedHeaders: 'Content-Type,Authorization',
