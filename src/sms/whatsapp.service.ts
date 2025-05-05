@@ -40,6 +40,61 @@ export class WhatsAppService {
       throw new Error(`Failed to send WhatsApp message: ${error.message}`);
     }
   }
+  async sendVerificationMessage(to: string, message: string): Promise<any> {
+    const url = `${this.apiUrl}/${this.phoneNumberId}/messages`;
+
+    const data = {
+      messaging_product: 'whatsapp',
+      recipient_type: 'individual',
+      to,
+      type: 'template',
+      template: {
+        name: 'authenticate_template_en',
+        language: {
+          code: 'en',
+        },
+        components: [
+          {
+            type: 'body',
+            parameters: [
+              {
+                type: 'text',
+                text: message,
+              },
+            ],
+          },
+          {
+            type: 'button',
+            sub_type: 'url',
+            index: '0',
+            parameters: [
+              {
+                type: 'text',
+                text: message,
+              },
+            ],
+          },
+        ],
+      },
+    };
+
+    const headers = {
+      Authorization: `Bearer ${this.accessToken}`,
+      'Content-Type': 'application/json',
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(data),
+      });
+
+      return await response.json();
+    } catch (error) {
+      throw new Error(`Failed to send WhatsApp message: ${error.message}`);
+    }
+  }
 
   // Method to send template messages
   //   async sendTemplateMessage(

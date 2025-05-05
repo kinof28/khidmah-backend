@@ -1,0 +1,98 @@
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <title>Welcome to Hi Khidma!</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        padding-top: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #105295;
+        margin-bottom: 20px;
+      }
+      p {
+        color: #333;
+        margin-bottom: 16px;
+        line-height: 1.5;
+      }
+      .verification-code {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0078d7;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        padding: 10px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .button {
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #0078d7;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+      .button:hover {
+        background-color: #0056b3;
+      }
+      .email-footer {
+        padding: 20px 30px;
+        background-color: #f1f1f1;
+        color: #777777;
+        font-size: 13px;
+        text-align: center;
+      }
+      .email-footer a {
+        color: #555555;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>Welcome to Hi Khidma!</h1>
+      <p>Dear {{name}},</p>
+      <p>Welcome to Hi Khidma! We're thrilled to have you join our community.
+        Thank you for choosing us and for trusting us. We're committed to
+        providing you with the best possible experience.</p>
+      <p>To ensure the security of your account, please verify your email
+        address using the verification code below.</p>
+      <p class='verification-code'>{{code}}</p>
+      <p>Please enter this code on the verification page to activate your
+        account.</p>
+      <p>If you did not sign up for an account with us, please ignore this
+        email.</p>
+      <p>We're excited to have you on board and look forward to a successful
+        partnership!</p>
+      <p>If you have any questions or need assistance, please don't hesitate to
+        contact us at
+        <a href='mailto:info@hikhidma.com'>info@hikhidma.com</a>
+        or
+        <a href='hikhidma.com/contact'>contact us here</a>.</p>
+      <div class='email-footer'>
+        Sincerely,<br />
+        <strong>Administration Team</strong><br />
+        <a href='mailto:info@hikhidma.com'>info@hikhidma.com</a><br />
+        ©
+        {{year}}
+        Organization Name. All rights reserved.
+      </div>
+    </div>
+  </body>
+</html>

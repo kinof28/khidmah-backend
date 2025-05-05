@@ -31,6 +31,20 @@ export class MailService {
     });
   }
 
+  async sendVerificationEmail(to: string, name: string, code: string) {
+    const year = new Date().getFullYear();
+    await this.mailerService.sendMail({
+      to,
+      subject: 'Welcome to Hi Khidma! Verify Your Account',
+      template: './verify-email', // .hbs extension is implied
+      context: {
+        name,
+        code,
+        year,
+      },
+    });
+  }
+
   //   async sendResetPasswordEmail(to: string, name: string, token: string) {
   //     await this.mailerService.sendMail({
   //       to,
