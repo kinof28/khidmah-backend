@@ -169,6 +169,7 @@ exports.Prisma.CustomerScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   isVerified: 'isVerified',
+  verificationCode: 'verificationCode',
   isBlocked: 'isBlocked',
   isDeleted: 'isDeleted'
 };
@@ -254,7 +255,8 @@ exports.Prisma.CustomerOrderByRelevanceFieldEnum = {
   password: 'password',
   longitude: 'longitude',
   latitude: 'latitude',
-  image: 'image'
+  image: 'image',
+  verificationCode: 'verificationCode'
 };
 
 exports.Prisma.BookingOrderByRelevanceFieldEnum = {

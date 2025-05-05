@@ -4668,6 +4668,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     isVerified: boolean | null
+    verificationCode: string | null
     isBlocked: boolean | null
     isDeleted: boolean | null
   }
@@ -4684,6 +4685,7 @@ export namespace Prisma {
     createdAt: Date | null
     updatedAt: Date | null
     isVerified: boolean | null
+    verificationCode: string | null
     isBlocked: boolean | null
     isDeleted: boolean | null
   }
@@ -4700,6 +4702,7 @@ export namespace Prisma {
     createdAt: number
     updatedAt: number
     isVerified: number
+    verificationCode: number
     isBlocked: number
     isDeleted: number
     _all: number
@@ -4726,6 +4729,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     isVerified?: true
+    verificationCode?: true
     isBlocked?: true
     isDeleted?: true
   }
@@ -4742,6 +4746,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     isVerified?: true
+    verificationCode?: true
     isBlocked?: true
     isDeleted?: true
   }
@@ -4758,6 +4763,7 @@ export namespace Prisma {
     createdAt?: true
     updatedAt?: true
     isVerified?: true
+    verificationCode?: true
     isBlocked?: true
     isDeleted?: true
     _all?: true
@@ -4861,6 +4867,7 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     isVerified: boolean
+    verificationCode: string
     isBlocked: boolean
     isDeleted: boolean
     _count: CustomerCountAggregateOutputType | null
@@ -4896,6 +4903,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     isVerified?: boolean
+    verificationCode?: boolean
     isBlocked?: boolean
     isDeleted?: boolean
     bookings?: boolean | Customer$bookingsArgs<ExtArgs>
@@ -4916,11 +4924,12 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     isVerified?: boolean
+    verificationCode?: boolean
     isBlocked?: boolean
     isDeleted?: boolean
   }
 
-  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "password" | "longitude" | "latitude" | "image" | "createdAt" | "updatedAt" | "isVerified" | "isBlocked" | "isDeleted", ExtArgs["result"]["customer"]>
+  export type CustomerOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "password" | "longitude" | "latitude" | "image" | "createdAt" | "updatedAt" | "isVerified" | "verificationCode" | "isBlocked" | "isDeleted", ExtArgs["result"]["customer"]>
   export type CustomerInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     bookings?: boolean | Customer$bookingsArgs<ExtArgs>
     _count?: boolean | CustomerCountOutputTypeDefaultArgs<ExtArgs>
@@ -4943,6 +4952,7 @@ export namespace Prisma {
       createdAt: Date
       updatedAt: Date
       isVerified: boolean
+      verificationCode: string
       isBlocked: boolean
       isDeleted: boolean
     }, ExtArgs["result"]["customer"]>
@@ -5326,6 +5336,7 @@ export namespace Prisma {
     readonly createdAt: FieldRef<"Customer", 'DateTime'>
     readonly updatedAt: FieldRef<"Customer", 'DateTime'>
     readonly isVerified: FieldRef<"Customer", 'Boolean'>
+    readonly verificationCode: FieldRef<"Customer", 'String'>
     readonly isBlocked: FieldRef<"Customer", 'Boolean'>
     readonly isDeleted: FieldRef<"Customer", 'Boolean'>
   }
@@ -8854,6 +8865,7 @@ export namespace Prisma {
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
     isVerified: 'isVerified',
+    verificationCode: 'verificationCode',
     isBlocked: 'isBlocked',
     isDeleted: 'isDeleted'
   };
@@ -8966,7 +8978,8 @@ export namespace Prisma {
     password: 'password',
     longitude: 'longitude',
     latitude: 'latitude',
-    image: 'image'
+    image: 'image',
+    verificationCode: 'verificationCode'
   };
 
   export type CustomerOrderByRelevanceFieldEnum = (typeof CustomerOrderByRelevanceFieldEnum)[keyof typeof CustomerOrderByRelevanceFieldEnum]
@@ -9307,6 +9320,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Customer"> | Date | string
     updatedAt?: DateTimeFilter<"Customer"> | Date | string
     isVerified?: BoolFilter<"Customer"> | boolean
+    verificationCode?: StringFilter<"Customer"> | string
     isBlocked?: BoolFilter<"Customer"> | boolean
     isDeleted?: BoolFilter<"Customer"> | boolean
     bookings?: BookingListRelationFilter
@@ -9324,6 +9338,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isVerified?: SortOrder
+    verificationCode?: SortOrder
     isBlocked?: SortOrder
     isDeleted?: SortOrder
     bookings?: BookingOrderByRelationAggregateInput
@@ -9345,6 +9360,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Customer"> | Date | string
     updatedAt?: DateTimeFilter<"Customer"> | Date | string
     isVerified?: BoolFilter<"Customer"> | boolean
+    verificationCode?: StringFilter<"Customer"> | string
     isBlocked?: BoolFilter<"Customer"> | boolean
     isDeleted?: BoolFilter<"Customer"> | boolean
     bookings?: BookingListRelationFilter
@@ -9362,6 +9378,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isVerified?: SortOrder
+    verificationCode?: SortOrder
     isBlocked?: SortOrder
     isDeleted?: SortOrder
     _count?: CustomerCountOrderByAggregateInput
@@ -9386,6 +9403,7 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Customer"> | Date | string
     isVerified?: BoolWithAggregatesFilter<"Customer"> | boolean
+    verificationCode?: StringWithAggregatesFilter<"Customer"> | string
     isBlocked?: BoolWithAggregatesFilter<"Customer"> | boolean
     isDeleted?: BoolWithAggregatesFilter<"Customer"> | boolean
   }
@@ -9939,6 +9957,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isVerified?: boolean
+    verificationCode?: string
     isBlocked?: boolean
     isDeleted?: boolean
     bookings?: BookingCreateNestedManyWithoutCustomerInput
@@ -9956,6 +9975,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isVerified?: boolean
+    verificationCode?: string
     isBlocked?: boolean
     isDeleted?: boolean
     bookings?: BookingUncheckedCreateNestedManyWithoutCustomerInput
@@ -9972,6 +9992,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: StringFieldUpdateOperationsInput | string
     isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     bookings?: BookingUpdateManyWithoutCustomerNestedInput
@@ -9989,6 +10010,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: StringFieldUpdateOperationsInput | string
     isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
     bookings?: BookingUncheckedUpdateManyWithoutCustomerNestedInput
@@ -10006,6 +10028,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isVerified?: boolean
+    verificationCode?: string
     isBlocked?: boolean
     isDeleted?: boolean
   }
@@ -10021,6 +10044,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: StringFieldUpdateOperationsInput | string
     isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -10037,6 +10061,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: StringFieldUpdateOperationsInput | string
     isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -10678,6 +10703,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isVerified?: SortOrder
+    verificationCode?: SortOrder
     isBlocked?: SortOrder
     isDeleted?: SortOrder
   }
@@ -10698,6 +10724,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isVerified?: SortOrder
+    verificationCode?: SortOrder
     isBlocked?: SortOrder
     isDeleted?: SortOrder
   }
@@ -10714,6 +10741,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     isVerified?: SortOrder
+    verificationCode?: SortOrder
     isBlocked?: SortOrder
     isDeleted?: SortOrder
   }
@@ -12003,6 +12031,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isVerified?: boolean
+    verificationCode?: string
     isBlocked?: boolean
     isDeleted?: boolean
   }
@@ -12019,6 +12048,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     isVerified?: boolean
+    verificationCode?: string
     isBlocked?: boolean
     isDeleted?: boolean
   }
@@ -12126,6 +12156,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: StringFieldUpdateOperationsInput | string
     isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -12142,6 +12173,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     isVerified?: BoolFieldUpdateOperationsInput | boolean
+    verificationCode?: StringFieldUpdateOperationsInput | string
     isBlocked?: BoolFieldUpdateOperationsInput | boolean
     isDeleted?: BoolFieldUpdateOperationsInput | boolean
   }
